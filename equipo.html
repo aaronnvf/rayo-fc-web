@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipo | Rayo FC</title>
+  <link rel="icon" type="image/png" href="images/logoo.png"/>
+
+  <!-- Configuración para diseño adaptable -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tipografías externas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Anton&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="MiPaginaCSS.css">
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+
+  <!-- Barra decorativa superior -->
+  <div class="barra-superior"></div>
+
+  <div class="header-principal">
+
+    <!-- Logotipo del club -->
+    <div class="logo">
+      <img src="images/logorayo.png" alt="Logotipo del Rayo FC">
+    </div>
+
+    <!-- Navegación principal -->
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="MiPagina.html">INICIO</a></li>
+        <li><a href="equipo.html" class="active">CLASIFICACION</a></li>
+        <li><a href="partidos.html">PARTIDOS</a></li>
+        <li><a href="jugadores.html">JUGADORES</a></li>
+      </ul>
+
+      <!-- Enlace a redes sociales -->
+      <div class="header-social">
+        <a
+          href="https://www.instagram.com/rayofctnf/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram del Rayo FC"
+        >
+          <img src="images/instagram.png" alt="Instagram del Rayo FC">
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- Barra decorativa inferior -->
+  <div class="barra-inferior"></div>
+</header>
+
+<!-- CONTENIDO PRINCIPAL  -->
+<main class="equipo-page">
+
+  <!-- Sección de clasificación de la liga -->
+  <section class="clasificacion">
+
+    <h1>Clasificación · Liga La Amistad</h1>
+
+    <!--
+      Tabla de clasificación:
+      - Uso de thead y tbody para semántica correcta
+      - Cada fila representa un equipo de la liga
+      - La fila del Rayo FC se destaca visualmente con una clase propia
+    -->
+    <table class="tabla-clasificacion">
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Equipo</th>
+          <th>Pts</th>
+          <th>J</th>
+          <th>G</th>
+          <th>E</th>
+          <th>P</th>
+          <th>GF</th>
+          <th>GE</th>
+          <th>DG</th>
+          <th>Últimos 5</th>
+          <th>+/-</th>
+        </tr>
+      </thead>
+
+    <tbody id="tabla-clasificacion-body"></tbody>
+
+    </table>
+
+  </section>
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer class="footer">
+  <div class="footer-contenido">
+
+    <div class="footer-identidad">
+      <img src="images/logorayo.png" alt="Logotipo del Rayo FC">
+
+      <div class="footer-texto">
+        <h3>RAYO FC</h3>
+        <p>© Rayo FC</p>
+        <p>Página oficial del Rayo FC</p>
+      </div>
+    </div>
+
+    <div class="footer-info">
+      <p>Club de Fútbol 7 · Liga La Amistad · Tenerife</p>
+    </div>
+
+    <div class="footer-redes">
+      <a href="tel:+34643823484" aria-label="Teléfono de contacto del Rayo FC">
+        CONTACTO
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+async function cargarClasificacion() {
+
+  const res = await fetch("https://rayo-api-ten.vercel.app/api/clasificacion");
+  const data = await res.json();
+  const matches = data.matches;
+
+  const ultimaJornada = Math.max(...matches.map(m => m.day.sequenceOrder));
+
+  const tablaActual = {};
+  const tablaAnterior = {};
+
+  function actualizar(tabla, home, away, hg, ag, guardarUltimos=false){
+
+    if(!tabla[home]) tabla[home] = {pj:0,g:0,e:0,p:0,gf:0,gc:0,pts:0,ultimos:[]};
+    if(!tabla[away]) tabla[away] = {pj:0,g:0,e:0,p:0,gf:0,gc:0,pts:0,ultimos:[]};
+
+    tabla[home].pj++;
+    tabla[away].pj++;
+
+    tabla[home].gf += hg;
+    tabla[home].gc += ag;
+
+    tabla[away].gf += ag;
+    tabla[away].gc += hg;
+
+    if(hg > ag){
+
+      tabla[home].g++;
+      tabla[home].pts += 3;
+      tabla[away].p++;
+
+      if(guardarUltimos){
+        tabla[home].ultimos.push("G");
+        tabla[away].ultimos.push("P");
+      }
+
+    } else if(hg < ag){
+
+      tabla[away].g++;
+      tabla[away].pts += 3;
+      tabla[home].p++;
+
+      if(guardarUltimos){
+        tabla[away].ultimos.push("G");
+        tabla[home].ultimos.push("P");
+      }
+
+    } else {
+
+      tabla[home].e++;
+      tabla[away].e++;
+
+      tabla[home].pts++;
+      tabla[away].pts++;
+
+      if(guardarUltimos){
+        tabla[home].ultimos.push("E");
+        tabla[away].ultimos.push("E");
+      }
+    }
+  }
+
+  matches.forEach(match => {
+
+    if(match.status !== 5) return;
+
+    const jornada = match.day.sequenceOrder;
+
+    const home = match.homeTeam.name.trim().replace(/"/g,"");
+    const away = match.visitorTeam.name.trim().replace(/"/g,"");
+
+    const hg = match.homeScore;
+    const ag = match.visitorScore;
+
+    actualizar(tablaActual,home,away,hg,ag,true);
+
+    if(jornada < ultimaJornada){
+      actualizar(tablaAnterior,home,away,hg,ag,false);
+    }
+
+  });
+
+  function ordenar(tabla){
+    return Object.entries(tabla)
+      .map(([nombre,stats])=>({
+        nombre,
+        ...stats,
+        dg: stats.gf - stats.gc
+      }))
+      .sort((a,b)=> 
+      b.pts - a.pts ||
+      b.dg - a.dg ||
+      b.gf - a.gf
+    );
+  }
+
+  const clasActual = ordenar(tablaActual);
+  const clasAnterior = ordenar(tablaAnterior);
+
+  const posicionesAnteriores = {};
+  clasAnterior.forEach((t,i)=>{
+    posicionesAnteriores[t.nombre] = i+1;
+  });
+
+  const tbody = document.getElementById("tabla-clasificacion-body");
+  tbody.innerHTML = "";
+
+  clasActual.forEach((team,i)=>{
+
+    const esRayo = team.nombre === "RAYO F.C.";
+
+    const posActual = i+1;
+    const posAnterior = posicionesAnteriores[team.nombre];
+
+    let movimiento = "=";
+
+    if(posAnterior){
+      const diff = posAnterior - posActual;
+      if(diff > 0) movimiento = "↑+" + diff;
+      if(diff < 0) movimiento = "↓" + Math.abs(diff);
+    }
+
+    const ultimos5 = team.ultimos.slice(-5).map(r=>{
+      if(r==="G") return `<span class="partido victoria"></span>`;
+      if(r==="E") return `<span class="partido empate"></span>`;
+      return `<span class="partido derrota"></span>`;
+    }).join("");
+
+    tbody.innerHTML += `
+    <tr class="${esRayo ? 'rayo' : ''}">
+      <td>${posActual}</td>
+      <td class="equipo-col">
+        <img src="images/equipo/${team.nombre}.png" class="logo-equipo">
+        ${team.nombre}
+      </td>
+      <td>${team.pts}</td>
+      <td>${team.pj}</td>
+      <td>${team.g}</td>
+      <td>${team.e}</td>
+      <td>${team.p}</td>
+      <td>${team.gf}</td>
+      <td>${team.gc}</td>
+      <td>${team.dg}</td>
+      <td class="td-ultimos">
+        <div class="ultimos-5">
+          ${ultimos5}
+        </div>
+      </td>
+      <td>${movimiento}</td>
+    </tr>
+    `;
+  });
+
+}
+
+cargarClasificacion();
+</script>
+
+</body>
+</html>
