@@ -639,35 +639,75 @@ opacity:1;
 }
 
 /* DISEÑO ADAPTABLE — MÓVIL */
-/* Ajuste global para que todo escale bien */
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
+/* 📱 AJUSTE REAL PARA MÓVIL (mantiene diseño) */
+@media (max-width: 768px){
 
-/* Contenedor principal */
-main, .container, .jugadores-page {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  /* HERO TEXTO */
+  .hero-texto h1{
+    font-size: 42px; /* antes 120px */
+  }
 
-/* Imágenes adaptables */
-img {
-  max-width: 100%;
-  height: auto;
-}
+  /* HEADER */
+  .header-principal{
+    height: 60px;
+  }
 
-/* Hero (imagen principal) */
-.hero, .jugadores-page {
-  width: 100%;
-}
+  .logo{
+    width: 70px;
+    height: 70px;
+    left: 10px;
+  }
 
-/* Header */
-.header-principal {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  .header-principal nav ul{
+    margin-left: 90px; /* menos espacio */
+    gap: 12px;
+  }
+
+  .header-principal nav a{
+    font-size: 11px;
+  }
+
+  /* IMAGEN HERO */
+  .hero{
+    min-height: 50vh;
+  }
+
+  /* JUGADORES */
+  .jugadores-page{
+    padding: 30px 10px;
+  }
+
+  .jugadores-grid{
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+
+  /* PARTIDOS */
+  .marcador{
+    padding: 20px;
+  }
+
+  .equipo{
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .resultado{
+    font-size: 22px;
+    min-width: auto;
+  }
+
+  /* FOOTER */
+  .footer-contenido{
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-info{
+    position: static;
+    transform: none;
+  }
+
 }
 
 /* SECCIÓN CLASIFICACIÓN
