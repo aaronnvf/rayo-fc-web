@@ -639,41 +639,35 @@ opacity:1;
 }
 
 /* DISEÑO ADAPTABLE — MÓVIL */
-@media (max-width: 600px) {
+/* Ajuste global para que todo escale bien */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
 
-  /* Altura del header más compacta */
-  .header-principal {
-    height: 64px;
-  }
+/* Contenedor principal */
+main, .container, .jugadores-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  /* Reducción y recolocación del logo */
-  .logo {
-    left: 12px;
-    width: 88px;
-    height: 88px;
-  }
+/* Imágenes adaptables */
+img {
+  max-width: 100%;
+  height: auto;
+}
 
-  /* Menú más compacto para pantallas pequeñas */
-  .header-principal nav ul {
-    margin-left: 120px;
-    gap: 14px;
-    font-size: 13px;
-  }
+/* Hero (imagen principal) */
+.hero, .jugadores-page {
+  width: 100%;
+}
 
-  /* Grid de jugadores en 2 columnas */
-  .jugadores-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  /* Título principal del hero más pequeño */
-  .hero-texto {
-    bottom: 40px;
-  }
-
-  .hero-texto h1 {
-    font-size: 48px;
-  }
+/* Header */
+.header-principal {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* SECCIÓN CLASIFICACIÓN
