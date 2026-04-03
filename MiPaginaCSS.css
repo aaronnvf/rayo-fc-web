@@ -638,78 +638,6 @@ opacity:1;
   }
 }
 
-/* DISEÑO ADAPTABLE — MÓVIL */
-/* 📱 AJUSTE REAL PARA MÓVIL (mantiene diseño) */
-@media (max-width: 768px){
-
-  /* HERO TEXTO */
-  .hero-texto h1{
-    font-size: 42px; /* antes 120px */
-  }
-
-  /* HEADER */
-  .header-principal{
-    height: 60px;
-  }
-
-  .logo{
-    width: 70px;
-    height: 70px;
-    left: 10px;
-  }
-
-  .header-principal nav ul{
-    margin-left: 90px; /* menos espacio */
-    gap: 12px;
-  }
-
-  .header-principal nav a{
-    font-size: 11px;
-  }
-
-  /* IMAGEN HERO */
-  .hero{
-    min-height: 50vh;
-  }
-
-  /* JUGADORES */
-  .jugadores-page{
-    padding: 30px 10px;
-  }
-
-  .jugadores-grid{
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 15px;
-  }
-
-  /* PARTIDOS */
-  .marcador{
-    padding: 20px;
-  }
-
-  .equipo{
-    font-size: 14px;
-    gap: 10px;
-  }
-
-  .resultado{
-    font-size: 22px;
-    min-width: auto;
-  }
-
-  /* FOOTER */
-  .footer-contenido{
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .footer-info{
-    position: static;
-    transform: none;
-  }
-
-}
-
 /* SECCIÓN CLASIFICACIÓN
 Tabla de posiciones de la liga */
 .clasificacion {
@@ -1249,4 +1177,377 @@ height:1px;
 margin:6px auto 0;
 
 background:rgba(255,255,255,0.15);
+}
+/* =========================================================
+   FIX GLOBAL + MÓVIL
+   Pegar al final del CSS
+========================================================= */
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* En pantallas táctiles, lo que depende de hover debe verse */
+@media (hover: none) and (pointer: coarse) {
+  .partido-card .hover-info {
+    position: static !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    background: transparent !important;
+    padding: 12px 14px 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jugador-stats {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .jugador-card:hover .jugador-stats {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .partido-item .goles,
+  .partido-item .fecha-partido,
+  .partido-item .mvp {
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    padding: 12px 14px !important;
+    margin: 0 !important;
+  }
+}
+
+/* =========================
+   MÓVIL
+========================= */
+@media (max-width: 768px) {
+
+  /* HEADER */
+  .barra-superior {
+    height: 12px;
+  }
+
+  .barra-inferior {
+    height: 6px;
+  }
+
+  .header-principal {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 10px;
+    display: grid;
+    grid-template-columns: 46px 1fr 28px;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  .logo {
+    position: static;
+    transform: none;
+    width: 46px;
+    height: 46px;
+    left: auto;
+    top: auto;
+  }
+
+  .header-principal nav {
+    width: 100%;
+    display: block;
+  }
+
+  .header-principal nav ul {
+    margin-left: 0;
+    gap: 8px 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .header-principal nav a {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+
+  .header-social {
+    margin-left: 0;
+    margin-right: 0;
+    justify-self: end;
+  }
+
+  .header-social img {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 56vh;
+    background-position: center top;
+  }
+
+  .hero-texto {
+    bottom: 18px;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .hero-texto h1 {
+    font-size: clamp(30px, 11vw, 56px);
+    line-height: 0.92;
+    letter-spacing: 1px;
+  }
+
+  /* INDEX: siguiente partido */
+  .partidos-page {
+    padding-bottom: 50px;
+  }
+
+  .siguiente-partido {
+    padding: 34px 10px 18px;
+  }
+
+  .siguiente-partido h2 {
+    font-size: 14px;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+  }
+
+  .partido-card {
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .partido-contenido {
+    padding: 16px 10px;
+  }
+
+  .equipo-prox {
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .equipo-prox img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .vs-prox {
+    font-size: 20px;
+  }
+
+  .hover-info {
+    position: static !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    background: transparent !important;
+    padding: 12px 0 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* PATROCINADORES */
+  .patrocinadores {
+    padding: 32px 0 38px;
+  }
+
+  .patrocinadores-linea {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .patrocinadores h2 {
+    font-size: 11px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .patrocinadores-logos a img {
+    width: 120px;
+    max-height: 72px;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 12px 0;
+  }
+
+  .footer-contenido {
+    position: static;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .footer-identidad {
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .footer-identidad img {
+    width: 66px;
+  }
+
+  .footer-info {
+    position: static;
+    transform: none;
+    order: 3;
+    width: 100%;
+  }
+
+  .footer-info p,
+  .footer-texto p,
+  .footer-redes a {
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .footer-texto h3 {
+    font-size: 13px;
+  }
+
+  /* JUGADORES */
+  .jugadores-page {
+    padding: 24px 10px 30px;
+  }
+
+  .selector-torneo {
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .selector-torneo button {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .jugadores-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .jugador-card {
+    padding: 8px;
+  }
+
+  .jugador-card:hover {
+    padding: 8px;
+  }
+
+  .jugador-stats {
+    gap: 10px;
+    padding: 8px;
+    margin-top: 8px;
+    opacity: 1;
+    transform: none;
+  }
+
+  .stat {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  /* CLASIFICACIÓN */
+  .clasificacion {
+    padding: 24px 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .clasificacion h1 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .tabla-clasificacion {
+    min-width: 860px;
+  }
+
+  /* PARTIDOS */
+  .partidos {
+    width: 100%;
+    max-width: none;
+  }
+
+  .partidos h1 {
+    font-size: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  .partido-item::before,
+  .partido-item::after {
+    width: 90%;
+    margin: 12px auto;
+  }
+
+  .marcador {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    padding: 16px 10px;
+    gap: 8px;
+  }
+
+  .equipo {
+    gap: 8px;
+    font-size: 12px;
+    min-width: 0;
+  }
+
+  .equipo span {
+    word-break: break-word;
+  }
+
+  .equipo img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .resultado {
+    font-size: 18px;
+    min-width: 64px;
+    letter-spacing: 1px;
+  }
+
+  .goles {
+    padding: 0 10px 14px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .goles-local,
+  .goles-visitante {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .mvp {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .fecha-partido {
+    font-size: 12px;
+    padding-bottom: 12px;
+  }
+
+  .barra-final {
+    width: 90%;
+    height: 6px;
+    margin: 24px auto;
+  }
 }
