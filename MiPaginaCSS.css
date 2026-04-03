@@ -1179,7 +1179,7 @@ margin:6px auto 0;
 background:rgba(255,255,255,0.15);
 }
 /* =========================================================
-   FIX GLOBAL + MÓVIL
+   RESPONSIVE LIMPIO
    Pegar al final del CSS
 ========================================================= */
 
@@ -1194,25 +1194,20 @@ img {
   height: auto;
 }
 
-/* En pantallas táctiles, lo que depende de hover debe verse */
+/* En pantallas táctiles, mostrar lo que en desktop depende de hover */
 @media (hover: none) and (pointer: coarse) {
   .partido-card .hover-info {
     position: static !important;
     inset: auto !important;
     opacity: 1 !important;
     background: transparent !important;
-    padding: 12px 14px 0 !important;
+    padding: 12px 0 0 !important;
     display: flex !important;
     flex-direction: column;
     align-items: center;
   }
 
   .jugador-stats {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .jugador-card:hover .jugador-stats {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -1228,18 +1223,15 @@ img {
   }
 }
 
-/* =========================
-   MÓVIL
-========================= */
 @media (max-width: 768px) {
 
   /* HEADER */
   .barra-superior {
-    height: 12px;
+    height: 10px;
   }
 
   .barra-inferior {
-    height: 6px;
+    height: 5px;
   }
 
   .header-principal {
@@ -1247,7 +1239,7 @@ img {
     min-height: 56px;
     padding: 8px 10px;
     display: grid;
-    grid-template-columns: 46px 1fr 28px;
+    grid-template-columns: 46px minmax(0, 1fr) 28px;
     align-items: center;
     column-gap: 8px;
   }
@@ -1255,27 +1247,25 @@ img {
   .logo {
     position: static;
     transform: none;
-    width: 46px;
-    height: 46px;
-    left: auto;
-    top: auto;
+    width: 44px;
+    height: 44px;
   }
 
   .header-principal nav {
     width: 100%;
-    display: block;
+    min-width: 0;
   }
 
   .header-principal nav ul {
     margin-left: 0;
-    gap: 8px 10px;
+    gap: 6px 10px;
     justify-content: center;
     flex-wrap: wrap;
   }
 
   .header-principal nav a {
     font-size: 10px;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.7px;
   }
 
   .header-social {
@@ -1285,52 +1275,52 @@ img {
   }
 
   .header-social img {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
   }
 
   /* HERO */
   .hero {
-    min-height: 56vh;
+    min-height: 52vh;
     background-position: center top;
   }
 
   .hero-texto {
-    bottom: 18px;
+    bottom: 14px;
     width: 100%;
     padding: 0 10px;
   }
 
   .hero-texto h1 {
-    font-size: clamp(30px, 11vw, 56px);
-    line-height: 0.92;
+    font-size: clamp(28px, 10vw, 52px);
+    line-height: 0.95;
     letter-spacing: 1px;
   }
 
   /* INDEX: siguiente partido */
   .partidos-page {
-    padding-bottom: 50px;
+    padding-bottom: 40px;
   }
 
   .siguiente-partido {
-    padding: 34px 10px 18px;
+    padding: 28px 10px 16px;
   }
 
   .siguiente-partido h2 {
-    font-size: 14px;
-    margin-bottom: 18px;
+    font-size: 13px;
+    margin-bottom: 16px;
     letter-spacing: 1px;
   }
 
   .partido-card {
     width: 100%;
-    min-height: 150px;
     height: auto;
+    min-height: 150px;
     border-radius: 14px;
   }
 
   .partido-contenido {
-    padding: 16px 10px;
+    padding: 14px 10px;
   }
 
   .equipo-prox {
@@ -1339,12 +1329,12 @@ img {
   }
 
   .equipo-prox img {
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
   }
 
   .vs-prox {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .hover-info {
@@ -1352,15 +1342,15 @@ img {
     inset: auto !important;
     opacity: 1 !important;
     background: transparent !important;
-    padding: 12px 0 0 !important;
+    padding: 10px 0 0 !important;
     display: flex !important;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
   }
 
   /* PATROCINADORES */
   .patrocinadores {
-    padding: 32px 0 38px;
+    padding: 28px 0 34px;
   }
 
   .patrocinadores-linea {
@@ -1375,8 +1365,8 @@ img {
   }
 
   .patrocinadores-logos a img {
-    width: 120px;
-    max-height: 72px;
+    width: 110px;
+    max-height: 68px;
   }
 
   /* FOOTER */
@@ -1399,7 +1389,7 @@ img {
   }
 
   .footer-identidad img {
-    width: 66px;
+    width: 60px;
   }
 
   .footer-info {
@@ -1422,12 +1412,13 @@ img {
 
   /* JUGADORES */
   .jugadores-page {
-    padding: 24px 10px 30px;
+    padding: 20px 10px 26px;
+    min-height: auto;
   }
 
   .selector-torneo {
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     flex-wrap: wrap;
   }
 
@@ -1442,15 +1433,15 @@ img {
   }
 
   .jugador-card {
-    padding: 8px;
+    padding: 6px;
   }
 
   .jugador-card:hover {
-    padding: 8px;
+    padding: 6px;
   }
 
   .jugador-stats {
-    gap: 10px;
+    gap: 8px;
     padding: 8px;
     margin-top: 8px;
     opacity: 1;
@@ -1458,20 +1449,18 @@ img {
   }
 
   .stat {
-    font-size: 12px;
-    gap: 6px;
+    font-size: 11px;
+    gap: 5px;
   }
 
   /* CLASIFICACIÓN */
   .clasificacion {
-    padding: 24px 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    padding: 20px 8px;
   }
 
   .clasificacion h1 {
-    font-size: 20px;
-    margin-bottom: 16px;
+    font-size: 18px;
+    margin-bottom: 14px;
   }
 
   .tabla-clasificacion {
@@ -1485,9 +1474,9 @@ img {
   }
 
   .partidos h1 {
-    font-size: 24px;
-    margin-top: 24px;
-    margin-bottom: 24px;
+    font-size: 22px;
+    margin-top: 22px;
+    margin-bottom: 22px;
     letter-spacing: 1px;
   }
 
@@ -1499,13 +1488,13 @@ img {
 
   .marcador {
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    padding: 16px 10px;
+    padding: 14px 10px;
     gap: 8px;
   }
 
   .equipo {
-    gap: 8px;
-    font-size: 12px;
+    gap: 7px;
+    font-size: 11px;
     min-width: 0;
   }
 
@@ -1520,12 +1509,12 @@ img {
 
   .resultado {
     font-size: 18px;
-    min-width: 64px;
+    min-width: 58px;
     letter-spacing: 1px;
   }
 
   .goles {
-    padding: 0 10px 14px;
+    padding: 0 10px 12px;
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1548,6 +1537,6 @@ img {
   .barra-final {
     width: 90%;
     height: 6px;
-    margin: 24px auto;
+    margin: 22px auto;
   }
 }
