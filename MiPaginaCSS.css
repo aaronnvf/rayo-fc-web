@@ -165,13 +165,14 @@ sobre el header principal */
 Imagen grande con overlay */
 
 .hero {
-  min-height: 75vh; /* Altura relativa a la pantalla */
-  background-image: url("images/plantilla.jpeg");
+  min-height: 75vh;
+  background-image: url("images/plantilla.png");
   background-size: cover;
-  background-position: center center;
-  background-color: #000; /* Color de respaldo */
-  position: relative; /* Necesario para overlay y texto */
-  margin-top: 0px; /* Ajuste visual para evitar huecos */
+  background-repeat: no-repeat;
+  background-position: center 72%;
+  background-color: #000;
+  position: relative;
+  margin-top: 0px;
 }
 
 /* Capa oscura con degradado sobre la imagen */
@@ -1282,7 +1283,7 @@ img {
   /* HERO */
   .hero {
     min-height: 52vh;
-    background-position: center top;
+    background-position: center 82%;
   }
 
   .hero-texto {
